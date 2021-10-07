@@ -1,0 +1,34 @@
+#visual studio
+.vs
+Engine/.vs
+
+#compilation files
+Engine/x64
+Engine/Debug
+Engine/Release
+Engine/Project_P/x64
+Engine/Project_P/Debug
+Engine/Project_P/Release
+
+#build
+[Bb]uild
+[Bb]uilds
+
+#git merge original files
+*.orig
+
+#archives
+*.zip
+*.rar
+*.7z
+
+#resources
+[Aa]sset
+[Aa]ssets
+[Rr]esources
+!Engine/Project_P/include/resources
+!Engine/Project_P/src/resources
+
+#images
+*.png
+*.jpg
