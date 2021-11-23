@@ -5,9 +5,11 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
+#include "lowrenderer/object.hpp"
+
 namespace LowRenderer
 {
-	class Camera
+	class Camera : public Object
 	{
 	private:
 		float	mouseSensitivity = 0.1f;

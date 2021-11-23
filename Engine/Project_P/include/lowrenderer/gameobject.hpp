@@ -4,9 +4,11 @@
 
 #include "core/math/math.hpp"
 
+#include "lowrenderer/object.hpp"
+
 namespace LowRenderer
 {
-	class GameObject
+	class GameObject : public Object
 	{
 	private:
 		Model model;

@@ -151,6 +151,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\lowrenderer\object.cpp" />
     <ClCompile Include="src\application.cpp" />
     <ClCompile Include="src\core\graph.cpp" />
     <ClCompile Include="src\core\math\math.cpp" />
@@ -194,6 +195,7 @@
     <ClInclude Include="include\lowrenderer\camera.hpp" />
     <ClInclude Include="include\lowrenderer\gameobject.hpp" />
     <ClInclude Include="include\lowrenderer\model.hpp" />
+    <ClInclude Include="include\lowrenderer\object.hpp" />
     <ClInclude Include="include\physics\collision.hpp" />
     <ClInclude Include="include\physics\primitives2\aabb2.hpp" />
     <ClInclude Include="include\physics\primitives2\circle.hpp" />

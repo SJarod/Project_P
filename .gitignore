@@ -28,6 +28,7 @@ Engine/Project_P/Release
 [Rr]esources
 !Engine/Project_P/include/resources
 !Engine/Project_P/src/resources
+!Engine/Project_P/resources/shaders
 
 #images
 *.png
