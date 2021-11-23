@@ -1,14 +1,10 @@
 #visual studio
 .vs
-Engine/.vs
 
 #compilation files
-Engine/x64
-Engine/Debug
-Engine/Release
-Engine/Project_P/x64
-Engine/Project_P/Debug
-Engine/Project_P/Release
+x64
+Debug
+Release
 
 #build
 [Bb]uild
@@ -25,7 +21,7 @@ Engine/Project_P/Release
 #resources
 [Aa]sset
 [Aa]ssets
-[Rr]esources
+#[Rr]esources
 !Engine/Project_P/include/resources
 !Engine/Project_P/src/resources
 !Engine/Project_P/resources/shaders
