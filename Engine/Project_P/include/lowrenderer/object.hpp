@@ -6,7 +6,7 @@ namespace LowRenderer
 {
 	class Object
 	{
-	protected:
+	public:
 		Transform transform;
 
 		virtual void start();

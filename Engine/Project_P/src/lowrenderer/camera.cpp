@@ -1,5 +1,7 @@
 #include "lowrenderer/camera.hpp"
 
+#include "application.hpp"
+
 mat4 LowRenderer::Camera::frustum(const float& left, const float& right, const float& bot, const float& top, bool orthographic) const
 {
 	if (orthographic)
@@ -23,26 +25,6 @@ mat4 LowRenderer::Camera::frustum(const float& left, const float& right, const f
 LowRenderer::Camera::Camera(const float& aspectRatio)
 {
 	aspect = aspectRatio;
-}
-
-void LowRenderer::Camera::update(GLFWwindow* window)
-{
-	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
-	glfwGetCursorPos(window, &m_mouseX, &m_mouseY);
-
-	position.x += (glfwGetKey(window, GLFW_KEY_D) - glfwGetKey(window, GLFW_KEY_A)) * moveSpeed * cosf(yaw * TORAD) +
-				  (glfwGetKey(window, GLFW_KEY_S) - glfwGetKey(window, GLFW_KEY_W)) * moveSpeed * sinf(yaw * TORAD);
-	position.z += (glfwGetKey(window, GLFW_KEY_S) - glfwGetKey(window, GLFW_KEY_W)) * moveSpeed * cosf(yaw * TORAD) -
-				  (glfwGetKey(window, GLFW_KEY_D) - glfwGetKey(window, GLFW_KEY_A)) * moveSpeed * sinf(yaw * TORAD);
-
-	position.y += (glfwGetKey(window, GLFW_KEY_SPACE) - glfwGetKey(window, GLFW_KEY_LEFT_CONTROL)) * moveSpeed;
-
-	yaw -= (float)(m_mouseX - m_oldX) * mouseSensitivity;
-	pitch += (float)(m_mouseY - m_oldY) * mouseSensitivity;
-	clamp(pitch, -90.f, 90.f);
-
-	m_oldY = (float)m_mouseY;
-	m_oldX = (float)m_mouseX;
 }
 
 mat4 LowRenderer::Camera::getViewMatrix() const
@@ -71,6 +53,34 @@ mat4 LowRenderer::Camera::getPerspective(const bool orthographic) const
 	if (orthographic)
 		return getOrthMatrix();
 	return getProjMatrix();
+}
+
+void LowRenderer::Camera::start()
+{
+	GLFWwindow* window = Application::getInstance()->window;
+	glfwSetCursorPos(window, 0.f, 0.f);
+}
+
+void LowRenderer::Camera::update()
+{
+	GLFWwindow* window = Application::getInstance()->window;
+
+	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+	glfwGetCursorPos(window, &m_mouseX, &m_mouseY);
+
+	position.x += (glfwGetKey(window, GLFW_KEY_D) - glfwGetKey(window, GLFW_KEY_A)) * moveSpeed * cosf(yaw * TORAD) +
+		(glfwGetKey(window, GLFW_KEY_S) - glfwGetKey(window, GLFW_KEY_W)) * moveSpeed * sinf(yaw * TORAD);
+	position.z += (glfwGetKey(window, GLFW_KEY_S) - glfwGetKey(window, GLFW_KEY_W)) * moveSpeed * cosf(yaw * TORAD) -
+		(glfwGetKey(window, GLFW_KEY_D) - glfwGetKey(window, GLFW_KEY_A)) * moveSpeed * sinf(yaw * TORAD);
+
+	position.y += (glfwGetKey(window, GLFW_KEY_SPACE) - glfwGetKey(window, GLFW_KEY_LEFT_CONTROL)) * moveSpeed;
+
+	pitch += (float)(m_mouseY - m_oldY) * mouseSensitivity;
+	yaw -= (float)(m_mouseX - m_oldX) * mouseSensitivity;
+	clamp(pitch, -90.f, 90.f);
+
+	m_oldY = (float)m_mouseY;
+	m_oldX = (float)m_mouseX;
 }
 
 mat4 LowRenderer::Camera::getVPMatrix() const

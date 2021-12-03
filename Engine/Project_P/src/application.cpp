@@ -1,8 +1,5 @@
 #include "application.hpp"
 
-#include <stdlib.h>
-#include <crtdbg.h>
-
 int Application::init()
 {
     /* Initialize the library */
@@ -28,7 +25,7 @@ int Application::init()
     }
 
     //initializing leak check
-    _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
+    initMemleaksDebug();
 
     //initializing graph
     graph = new Graph;
@@ -38,10 +35,17 @@ int Application::init()
 
 void Application::gameLoop()
 {
+    for (Object* obj : graph->getScene(0).objs)
+    {
+        obj->start();
+    }
+
+    graph->getScene(0).cams[(int)graph->getScene(0).mode]->start();
+
     /* Loop until the user closes the window */
     while (!glfwWindowShouldClose(window))
     {
-        graph->getScene(0).updateScene(window);
+        graph->getScene(0).updateScene();
         graph->getScene(0).displayScene();
 
         /* Swap front and back buffers */

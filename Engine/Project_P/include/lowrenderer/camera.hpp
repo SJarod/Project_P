@@ -41,10 +41,12 @@ namespace LowRenderer
 		mat4	getPerspective(const bool orthographic) const;
 
 	public:
+		void	start() override;
+		void	update() override;
+
+	public:
 		Camera() = default;
 		Camera(const float& aspectRatio);
-
-		void	update(GLFWwindow* window);
 
 		mat4	getVPMatrix() const;
 		mat4	getMVPMatrix(const mat4& modelMatrix) const;

@@ -1,5 +1,7 @@
 #include "resources/scene.hpp"
 
+#include "application.hpp"
+
 Resources::Scene::Scene()
 {
 	cams.push_back(new Camera);
@@ -20,9 +22,14 @@ Resources::Scene::~Scene()
 	gos.clear();
 }
 
-void Resources::Scene::updateScene(GLFWwindow* window)
+void Resources::Scene::updateScene()
 {
-    cams[(int)mode]->update(window);
+    for (Object* obj : objs)
+    {
+        obj->update();
+    }
+
+    cams[(int)mode]->update();
 }
 
 void Resources::Scene::displayScene() const

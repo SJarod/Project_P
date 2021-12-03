@@ -4,6 +4,7 @@
 
 #include "lowrenderer/camera.hpp"
 #include "lowrenderer/gameobject.hpp"
+#include "lowrenderer/object.hpp"
 
 namespace Resources
 {
@@ -18,6 +19,9 @@ namespace Resources
 	private:
 
 	public:
+		std::vector<Object*>		objs;
+
+		//remove
 		std::vector<Camera*>		cams;
 		std::vector<GameObject*>	gos;
 
@@ -26,7 +30,7 @@ namespace Resources
 		Scene();
 		~Scene();
 
-		void updateScene(GLFWwindow* window);
+		void updateScene();
 		void displayScene() const;
 	};
 }
