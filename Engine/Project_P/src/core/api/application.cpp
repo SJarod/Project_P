@@ -1,6 +1,8 @@
-#include "application.hpp"
+#include "core/api/application.hpp"
 
-int Application::init()
+#include <iostream>
+
+int Core::API::Application::init()
 {
     /* Initialize the library */
     if (!glfwInit())
@@ -33,14 +35,9 @@ int Application::init()
     return 0;
 }
 
-void Application::gameLoop()
+void Core::API::Application::gameLoop()
 {
-    for (Object* obj : graph->getScene(0).objs)
-    {
-        obj->start();
-    }
-
-    graph->getScene(0).cams[(int)graph->getScene(0).mode]->start();
+    graph->getScene(0).startScene();
 
     /* Loop until the user closes the window */
     while (!glfwWindowShouldClose(window))
@@ -56,14 +53,14 @@ void Application::gameLoop()
     }
 }
 
-Application::~Application()
+Core::API::Application::~Application()
 {
     delete graph;
 
     glfwTerminate();
 }
 
-void Application::run()
+void Core::API::Application::run()
 {
     if (init() < 0)
     {
@@ -74,7 +71,7 @@ void Application::run()
     gameLoop();
 }
 
-float Application::getAspectRatio() const
+float Core::API::Application::getAspectRatio() const
 {
     return (float)SCRN_WIDTH / (float)SCRN_HEIGHT;
 }

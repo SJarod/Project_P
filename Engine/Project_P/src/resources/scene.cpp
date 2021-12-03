@@ -1,6 +1,6 @@
 #include "resources/scene.hpp"
 
-#include "application.hpp"
+#include "core/api/application.hpp"
 
 Resources::Scene::Scene()
 {
@@ -20,6 +20,16 @@ Resources::Scene::~Scene()
 		delete go;
 
 	gos.clear();
+}
+
+void Resources::Scene::startScene()
+{
+    for (Object* obj : objs)
+    {
+        obj->start();
+    }
+
+    cams[(int)mode]->start();
 }
 
 void Resources::Scene::updateScene()

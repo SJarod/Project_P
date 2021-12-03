@@ -30,7 +30,9 @@ namespace Resources
 		Scene();
 		~Scene();
 
+		void startScene();
 		void updateScene();
+
 		void displayScene() const;
 	};
 }

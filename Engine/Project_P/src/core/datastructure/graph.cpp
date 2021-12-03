@@ -1,4 +1,4 @@
-#include "core/graph.hpp"
+#include "core/datastructure/graph.hpp"
 
 Core::DataStructure::Graph::Graph()
 {

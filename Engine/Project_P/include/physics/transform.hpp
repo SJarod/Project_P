@@ -6,12 +6,11 @@ namespace Physics
 {
 	class Transform
 	{
-	private:
-		vec3 m_position = { 0.f, 0.f, 0.f };
-		vec3 m_rotation = { 0.f, 0.f, 0.f }; //pitch, yaw, roll
-		vec3 m_scale = { 1.f, 1.f, 1.f };
-
 	public:
+		vec3 position = { 0.f, 0.f, 0.f };
+		vec3 rotation = { 0.f, 0.f, 0.f }; //pitch, yaw, roll
+		vec3 scale = { 1.f, 1.f, 1.f };
+
 		mat4 getModelMatrix() const;
 	};
 }

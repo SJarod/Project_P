@@ -152,8 +152,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\lowrenderer\object.cpp" />
-    <ClCompile Include="src\application.cpp" />
-    <ClCompile Include="src\core\graph.cpp" />
+    <ClCompile Include="src\core\api\application.cpp" />
+    <ClCompile Include="src\core\datastructure\graph.cpp" />
     <ClCompile Include="src\core\math\math.cpp" />
     <ClCompile Include="src\core\math\quaternion.cpp" />
     <ClCompile Include="src\glad.c" />
@@ -189,8 +189,8 @@
     <None Include="resources\shaders\base.vert" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\application.hpp" />
-    <ClInclude Include="include\core\graph.hpp" />
+    <ClInclude Include="include\core\api\application.hpp" />
+    <ClInclude Include="include\core\datastructure\graph.hpp" />
     <ClInclude Include="include\core\math\math.hpp" />
     <ClInclude Include="include\core\math\quaternion.hpp" />
     <ClInclude Include="include\lowrenderer\camera.hpp" />
