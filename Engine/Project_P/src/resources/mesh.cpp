@@ -183,7 +183,7 @@ bool Resources::Mesh::loadMesh(const std::string& filename)
     return true;
 }
 
-bool Resources::Mesh::loadMesh(Box* b)
+bool Resources::Mesh::loadMesh(const Box* b)
 {
     if (!b)
         return false;
@@ -195,7 +195,7 @@ bool Resources::Mesh::loadMesh(Box* b)
     return true;
 }
 
-bool Resources::Mesh::loadMesh(Sphere* sph)
+bool Resources::Mesh::loadMesh(const Sphere* sph)
 {
     if (!sph)
         return false;

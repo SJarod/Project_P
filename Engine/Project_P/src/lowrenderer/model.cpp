@@ -8,6 +8,8 @@ LowRenderer::Model::Model()
 	mesh = new Mesh;
 	mesh->loadMesh("the_noble_craftsman.obj");
 	mesh->transform.scale = { 10.f, 10.f, 10.f };
+	texture = new Texture;
+	texture->loadTexture("BLACKSMITH_TEX.jpg");
 }
 
 LowRenderer::Model::~Model()
@@ -26,6 +28,8 @@ void LowRenderer::Model::draw() const
 	//rendering
 	shader->use();
 	shader->passMat4(VP * mesh->transform.getModelMatrix(), "mvp");
+
+	texture->bindTexture();
 
 	mesh->render();
 }

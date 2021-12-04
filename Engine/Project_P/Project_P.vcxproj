@@ -151,6 +151,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\externals\stb_image.c" />
+    <ClCompile Include="src\resources\texture.cpp" />
     <ClCompile Include="src\lowrenderer\object.cpp" />
     <ClCompile Include="src\core\engine\application.cpp" />
     <ClCompile Include="src\core\datastructure\graph.cpp" />
@@ -218,6 +220,7 @@
     <ClInclude Include="include\resources\mesh.hpp" />
     <ClInclude Include="include\resources\scene.hpp" />
     <ClInclude Include="include\resources\shader.hpp" />
+    <ClInclude Include="include\resources\texture.hpp" />
     <ClInclude Include="include\utils\memleaks.hpp" />
     <ClInclude Include="include\utils\singleton.hpp" />
     <ClInclude Include="include\utils\threadpool.hpp" />

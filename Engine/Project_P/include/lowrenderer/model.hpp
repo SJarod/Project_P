@@ -2,6 +2,7 @@
 
 #include "resources/shader.hpp"
 #include "resources/mesh.hpp"
+#include "resources/texture.hpp"
 #include "lowrenderer/camera.hpp"
 
 #include "core/math/math.hpp"
@@ -13,6 +14,7 @@ namespace LowRenderer
 	private:
 		Shader*		shader;
 		Mesh*		mesh;
+		Texture*	texture;
 
 		Camera*		renderCam = nullptr;
 
