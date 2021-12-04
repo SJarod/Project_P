@@ -16,6 +16,7 @@ LowRenderer::Model::~Model()
 {
 	delete shader;
 	delete mesh;
+	delete texture;
 }
 
 void LowRenderer::Model::draw() const

@@ -30,9 +30,9 @@ namespace Resources
 		GLuint VAO;
 
 		void assembleVertices(const std::vector<float3>& rawV,
-							  const std::vector<float2>& rawVt,
-							  const std::vector<float3>& rawVn,
-							  const std::vector<uint3>&  rawI);
+						      const std::vector<uint3>&  rawI,
+						      const std::vector<float2>& rawVt = std::vector<float2>(),
+						      const std::vector<float3>& rawVn = std::vector<float3>());
 		void generateMeshVAO();
 
 	public:
@@ -41,8 +41,8 @@ namespace Resources
 		~Mesh();
 
 		bool loadMesh(const std::string& filename);
-		bool loadMesh(const Box* b);
-		bool loadMesh(const Sphere* sph);
+		bool loadMesh(const Box& b);
+		bool loadMesh(const Sphere& sph);
 
 		void render() const;
 	};

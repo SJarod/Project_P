@@ -6,9 +6,9 @@
 #include <iostream>
 
 void Resources::Mesh::assembleVertices(const std::vector<float3>& rawV,
+                                       const std::vector<uint3>&  rawI,
                                        const std::vector<float2>& rawVt,
-                                       const std::vector<float3>& rawVn,
-                                       const std::vector<uint3>&  rawI)
+                                       const std::vector<float3>& rawVn)
 {
     for (int i = 0; i < rawI.size(); ++i)
     {
@@ -16,8 +16,8 @@ void Resources::Mesh::assembleVertices(const std::vector<float3>& rawV,
 
         Vertex vertex;
         vertex.pos = rawV[v];
-        vertex.uv = rawVt[t];
-        vertex.n = rawVn[n];
+        vertex.uv = rawVt.size() == 0 ? vec2{ 0.f, 0.f } : vec2(rawVt[t]);
+        vertex.n = rawVn.size() == 0 ? vec3{ 0.f, 0.f, 0.f } : vec3(rawVn[n]);
 
         vertices.push_back(vertex);
     }
@@ -175,7 +175,7 @@ bool Resources::Mesh::loadMesh(const std::string& filename)
         }
     }
 
-    assembleVertices(rawV, rawVt, rawVn, rawI);
+    assembleVertices(rawV, rawI, rawVt, rawVn);
     generateMeshVAO();
 
     std::cout << "successfully loaded obj file : " << filename << std::endl;
@@ -183,24 +183,68 @@ bool Resources::Mesh::loadMesh(const std::string& filename)
     return true;
 }
 
-bool Resources::Mesh::loadMesh(const Box* b)
+bool Resources::Mesh::loadMesh(const Box& b)
 {
-    if (!b)
-        return false;
+    std::vector<float>  vertices;
+    std::vector<uint>   indices;
+    //vertex position, vertex index
+    b.getAttribs(vertices, indices);
 
-    //b->getAttribs(vertices, indices);
+    std::vector<float3> rawV;
+    for (int i = 0; i < vertices.size(); i += 3)
+    {
+        float3 vv;
+        vv.e[0] = vertices[i];
+        vv.e[1] = vertices[i + 1];
+        vv.e[2] = vertices[i + 2];
+        rawV.push_back(vv);
+    }
+
+    std::vector<uint3> rawI;
+    for (int i = 0; i < indices.size(); ++i)
+    {
+        uint3 vi;
+        vi.e[0] = indices[i];
+        vi.e[1] = 0;
+        vi.e[2] = 0;
+        rawI.push_back(vi);
+    }
+
+    assembleVertices(rawV, rawI);
 
     generateMeshVAO();
 
     return true;
 }
 
-bool Resources::Mesh::loadMesh(const Sphere* sph)
+bool Resources::Mesh::loadMesh(const Sphere& sph)
 {
-    if (!sph)
-        return false;
+    std::vector<float>  vertices;
+    std::vector<uint>   indices;
+    //vertex position, vertex index
+    sph.getAttribs(vertices, indices);
 
-    //sph->getAttribs(vertices, indices);
+    std::vector<float3> rawV;
+    for (int i = 0; i < vertices.size(); i += 3)
+    {
+        float3 vv;
+        vv.e[0] = vertices[i];
+        vv.e[1] = vertices[i + 1];
+        vv.e[2] = vertices[i + 2];
+        rawV.push_back(vv);
+    }
+
+    std::vector<uint3> rawI;
+    for (int i = 0; i < indices.size(); ++i)
+    {
+        uint3 vi;
+        vi.e[0] = indices[i];
+        vi.e[1] = 0;
+        vi.e[2] = 0;
+        rawI.push_back(vi);
+    }
+
+    assembleVertices(rawV, rawI);
 
     generateMeshVAO();
 
