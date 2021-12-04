@@ -5,7 +5,25 @@
 
 #include <iostream>
 
-void Resources::Mesh::generateMesh()
+void Resources::Mesh::assembleVertices(const std::vector<float3>& rawV,
+                                       const std::vector<float2>& rawVt,
+                                       const std::vector<float3>& rawVn,
+                                       const std::vector<uint3>&  rawI)
+{
+    for (int i = 0; i < rawI.size(); ++i)
+    {
+        uint v = rawI[i].e[0], t = rawI[i].e[1], n = rawI[i].e[2];
+
+        Vertex vertex;
+        vertex.pos = rawV[v];
+        vertex.uv = rawVt[t];
+        vertex.n = rawVn[n];
+
+        vertices.push_back(vertex);
+    }
+}
+
+void Resources::Mesh::generateMeshVAO()
 {
     //VBO
     GLuint VBO;
@@ -15,22 +33,19 @@ void Resources::Mesh::generateMesh()
     glGenVertexArrays(1, &VAO);
     glBindVertexArray(VAO);
         glBindBuffer(GL_ARRAY_BUFFER, VBO);
-        glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(float), vertices.data(), GL_STATIC_DRAW);
-
-        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
-        glEnableVertexAttribArray(0);
-    glBindVertexArray(0);
-
-    //EBO
-    GLuint EBO;
-    glGenBuffers(1, &EBO);
-    glBindVertexArray(VAO);
-        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-        glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(unsigned int), indices.data(), GL_STATIC_DRAW);
+        glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(Vertex), vertices.data(), GL_STATIC_DRAW);
+		//vertex position
+		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), (GLvoid*)0);
+		glEnableVertexAttribArray(0);
+		//texture coordinates
+		glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), (GLvoid*)(3 * sizeof(GLfloat)));
+		glEnableVertexAttribArray(1);
+		//vertex normal
+		glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), (GLvoid*)(5 * sizeof(GLfloat)));
+		glEnableVertexAttribArray(2);
     glBindVertexArray(0);
 
     glDeleteBuffers(1, &VBO);
-    glDeleteBuffers(1, &EBO);
 }
 
 Resources::Mesh::~Mesh()
@@ -40,6 +55,13 @@ Resources::Mesh::~Mesh()
 
 bool Resources::Mesh::loadMesh(const std::string& filename)
 {
+    //raw information about vertex, uv, normal
+    std::vector<float3>	rawV;
+    std::vector<float2>	rawVt;
+    std::vector<float3>	rawVn;
+    //raw information about indices
+    std::vector<uint3>	rawI;
+
     std::ifstream file;
     file.open("assets/" + filename);
     if (!file.is_open())
@@ -68,20 +90,41 @@ bool Resources::Mesh::loadMesh(const std::string& filename)
             {
                 std::istringstream iss(line.substr(2));
 
+                float3 pos;
                 for (int i = 0; i < 3; ++i)
-                {
-                    float pos;
-                    iss >> pos;
-                    vertices.push_back(pos);
-                }
+                    iss >> pos.e[i];
+                
+                rawV.push_back(pos);
 
                 break;
             }
             //texture uv
             case 't':
+            {
+                std::istringstream iss(line.substr(2));
+
+                float2 uv;
+                for (int i = 0; i < 2; ++i)
+                    iss >> uv.e[i];
+
+                rawVt.push_back(uv);
+
                 break;
+            }
             //vertex normal
             case 'n':
+            {
+                std::istringstream iss(line.substr(2));
+
+                float3 n;
+                for (int i = 0; i < 3; ++i)
+                    iss >> n.e[i];
+
+                rawVn.push_back(n);
+
+                break;
+            }
+            default:
                 break;
             }
 
@@ -106,16 +149,22 @@ bool Resources::Mesh::loadMesh(const std::string& filename)
 
                 for (int i = 0; i < 3; ++i)
                 {
-                    //indices
-                    uint v, t, n;
-                    iss >> v;
-                    iss.ignore();
-                    iss >> t;
-                    iss.ignore();
-                    iss >> n;
+                    uint3 indices;
+
+                    //indices v, t, n
+                    iss >> indices.e[0];
+                    --indices.e[0];
                     iss.ignore();
 
-                    indices.push_back(v - 1);
+                    iss >> indices.e[1];
+                    --indices.e[1];
+                    iss.ignore();
+
+                    iss >> indices.e[2];
+                    --indices.e[2];
+                    iss.ignore();
+
+                    rawI.push_back(indices);
                 }
             }
 
@@ -126,7 +175,8 @@ bool Resources::Mesh::loadMesh(const std::string& filename)
         }
     }
 
-    generateMesh();
+    assembleVertices(rawV, rawVt, rawVn, rawI);
+    generateMeshVAO();
 
     std::cout << "successfully loaded obj file : " << filename << std::endl;
 
@@ -138,9 +188,9 @@ bool Resources::Mesh::loadMesh(Box* b)
     if (!b)
         return false;
 
-    b->getAttribs(vertices, indices);
+    //b->getAttribs(vertices, indices);
 
-    generateMesh();
+    generateMeshVAO();
 
     return true;
 }
@@ -150,9 +200,9 @@ bool Resources::Mesh::loadMesh(Sphere* sph)
     if (!sph)
         return false;
 
-    sph->getAttribs(vertices, indices);
+    //sph->getAttribs(vertices, indices);
 
-    generateMesh();
+    generateMeshVAO();
 
     return true;
 }
@@ -161,8 +211,8 @@ void Resources::Mesh::render() const
 {
     glBindVertexArray(VAO);
         //using VBO
-        //glDrawArrays(GL_TRIANGLES, 0, 3);
+        glDrawArrays(GL_TRIANGLES, 0, (GLsizei)vertices.size());
         //using EBO
-        glDrawElements(GL_TRIANGLES, (GLsizei)indices.size(), GL_UNSIGNED_INT, 0);
+        //glDrawElements(GL_TRIANGLES, (GLsizei)indices.size(), GL_UNSIGNED_INT, 0);
     glBindVertexArray(0);
 }

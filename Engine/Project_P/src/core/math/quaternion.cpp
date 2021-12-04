@@ -1,4 +1,4 @@
-#include "core/math/quaternion.hpp"
+#include "math/quaternion.hpp"
 
 #include <iostream>
 

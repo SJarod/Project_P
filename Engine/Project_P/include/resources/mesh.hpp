@@ -25,13 +25,15 @@ namespace Resources
 	class Mesh
 	{
 	private:
-		std::vector<float>	vertices;
-		//std::vector<Vertex> vertices;
-		std::vector<uint>	indices;
+		std::vector<Vertex> vertices;
 
 		GLuint VAO;
 
-		void generateMesh();
+		void assembleVertices(const std::vector<float3>& rawV,
+							  const std::vector<float2>& rawVt,
+							  const std::vector<float3>& rawVn,
+							  const std::vector<uint3>&  rawI);
+		void generateMeshVAO();
 
 	public:
 		Transform transform;

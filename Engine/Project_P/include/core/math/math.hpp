@@ -13,20 +13,59 @@
 #include <cmath>
 #include <cfloat>
 
+#include <string>
+
 namespace Core
 {
 	namespace Math
 	{
 		typedef unsigned int uint;
 
+		union vec2;
+		union vec3;
 		union Quaternion;
+
+		union int2
+		{
+			int e[2];
+		};
+
+		union int3
+		{
+			int e[3];
+		};
+
+		union uint2
+		{
+			uint e[2];
+		};
+
+		union uint3
+		{
+			uint e[3];
+		};
+
+		union float2
+		{
+			float e[2];
+
+			inline operator vec2() const;
+		};
+
+		union float3
+		{
+			float e[3];
+
+			inline operator vec3() const;
+		};
 
 		union vec2
 		{
 			float	e[2];
 			struct	{ float x; float y; };
 
-			void	print() const;
+			inline operator float2() const;
+			operator std::string () const;
 		};
 
 		union vec3
@@ -36,14 +75,15 @@ namespace Core
 			struct	{ float i; float j; float k; };
 			vec2	xy;
 
+			inline operator float3() const;
+			operator std::string () const;
+
 			//get vector's quaternion
 			Quaternion q() const;
 
 			inline float	sqrMag() const;
 			inline float	mag() const;
 			inline vec3		normalized() const;
-
-			void		print() const;
 		};
 
 		union vec4
@@ -54,7 +94,7 @@ namespace Core
 			vec3	xyz;
 			vec3	rgb;
 
-			void	print() const;
+			operator std::string () const;
 		};
 
 		union mat3
@@ -62,7 +102,7 @@ namespace Core
 			vec3	c[3];
 			float	e[9];
 
-			void	print() const;
+			operator std::string () const;
 		};
 
 		union mat4
@@ -70,7 +110,7 @@ namespace Core
 			vec4	c[4];
 			float	e[16];
 
-			void	print() const;
+			operator std::string () const;
 		};
 
 		inline mat3	identity3();
@@ -122,6 +162,26 @@ namespace Core
 }
 
 using namespace Core::Math;
+
+inline Core::Math::float2::operator vec2() const
+{
+	return vec2{ e[0], e[1] };
+}
+
+inline Core::Math::float3::operator vec3() const
+{
+	return vec3{ e[0], e[1], e[2] };
+}
+
+inline Core::Math::vec2::operator float2() const
+{
+	return float2{ x, y };
+}
+
+inline Core::Math::vec3::operator float3() const
+{
+	return float3{ x, y, z };
+}
 
 inline float Core::Math::vec3::sqrMag() const
 {
