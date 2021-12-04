@@ -1,5 +1,33 @@
 #include "resources/mesh.hpp"
 
+void Resources::Mesh::generateMesh()
+{
+    //VBO
+    GLuint VBO;
+    glGenBuffers(1, &VBO);
+
+    //VAO
+    glGenVertexArrays(1, &VAO);
+    glBindVertexArray(VAO);
+        glBindBuffer(GL_ARRAY_BUFFER, VBO);
+        glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(float), vertices.data(), GL_STATIC_DRAW);
+
+        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+        glEnableVertexAttribArray(0);
+    glBindVertexArray(0);
+
+    //EBO
+    GLuint EBO;
+    glGenBuffers(1, &EBO);
+    glBindVertexArray(VAO);
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+        glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(unsigned int), indices.data(), GL_STATIC_DRAW);
+    glBindVertexArray(0);
+
+    glDeleteBuffers(1, &VBO);
+    glDeleteBuffers(1, &EBO);
+}
+
 Resources::Mesh::~Mesh()
 {
 	glDeleteVertexArrays(1, &VAO);
@@ -17,30 +45,7 @@ bool Resources::Mesh::loadMesh(Box* b)
 
     b->getAttribs(vertices, indices);
 
-    //VBO
-    GLuint VBO;
-    glGenBuffers(1, &VBO);
-
-    //VAO
-    glGenVertexArrays(1, &VAO);
-    glBindVertexArray(VAO);
-        glBindBuffer(GL_ARRAY_BUFFER, VBO);
-        glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(float), vertices.data(), GL_STATIC_DRAW);
-
-        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
-        glEnableVertexAttribArray(0);
-    glBindVertexArray(0);
-
-    //EBO
-    GLuint EBO;
-    glGenBuffers(1, &EBO);
-    glBindVertexArray(VAO);
-        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-        glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(unsigned int), indices.data(), GL_STATIC_DRAW);
-    glBindVertexArray(0);
-
-    glDeleteBuffers(1, &VBO);
-    glDeleteBuffers(1, &EBO);
+    generateMesh();
 
     return true;
 }
@@ -52,30 +57,7 @@ bool Resources::Mesh::loadMesh(Sphere* sph)
 
     sph->getAttribs(vertices, indices);
 
-    //VBO
-    GLuint VBO;
-    glGenBuffers(1, &VBO);
-
-    //VAO
-    glGenVertexArrays(1, &VAO);
-    glBindVertexArray(VAO);
-        glBindBuffer(GL_ARRAY_BUFFER, VBO);
-        glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(float), vertices.data(), GL_STATIC_DRAW);
-
-        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
-        glEnableVertexAttribArray(0);
-    glBindVertexArray(0);
-
-    //EBO
-    GLuint EBO;
-    glGenBuffers(1, &EBO);
-    glBindVertexArray(VAO);
-        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-        glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(unsigned int), indices.data(), GL_STATIC_DRAW);
-    glBindVertexArray(0);
-
-    glDeleteBuffers(1, &VBO);
-    glDeleteBuffers(1, &EBO);
+    generateMesh();
 
     return true;
 }

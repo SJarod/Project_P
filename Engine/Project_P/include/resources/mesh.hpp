@@ -12,13 +12,24 @@
 
 namespace Resources
 {
+	class Vertex
+	{
+	public:
+		vec3 pos;	//vertex position
+		vec2 uv;	//texture coordinates
+		vec3 n;		//vertex normal
+	};
+
 	class Mesh
 	{
 	private:
 		std::vector<float>			vertices;
+		//std::vector<Vertex>			vertices;
 		std::vector<unsigned int>	indices;
 
 		GLuint		VAO;
+
+		void generateMesh();
 
 	public:
 		Transform	transform;
