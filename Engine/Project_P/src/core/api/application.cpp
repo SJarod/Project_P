@@ -31,19 +31,20 @@ int Core::API::Application::init()
 
     //initializing graph
     graph = new Graph;
+    graph->loadScene("");
 
     return 0;
 }
 
 void Core::API::Application::gameLoop()
 {
-    graph->getScene(0).startScene();
+    graph->getCurrentScene()->startScene();
 
     /* Loop until the user closes the window */
     while (!glfwWindowShouldClose(window))
     {
-        graph->getScene(0).updateScene();
-        graph->getScene(0).displayScene();
+        graph->getCurrentScene()->updateScene();
+        graph->getCurrentScene()->renderScene();
 
         /* Swap front and back buffers */
         glfwSwapBuffers(window);

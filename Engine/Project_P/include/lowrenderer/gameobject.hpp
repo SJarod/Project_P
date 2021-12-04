@@ -1,10 +1,9 @@
 #pragma once
 
+#include "lowrenderer/object.hpp"
 #include "lowrenderer/model.hpp"
 
 #include "core/math/math.hpp"
-
-#include "lowrenderer/object.hpp"
 
 namespace LowRenderer
 {
@@ -14,7 +13,9 @@ namespace LowRenderer
 		Model model;
 
 	public:
-		void draw(const mat4& VP) const;
+		virtual void start() override;
+		virtual void update() override;
+		virtual void render() override;
 	};
 }
 

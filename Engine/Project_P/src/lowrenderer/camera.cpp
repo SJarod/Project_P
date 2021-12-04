@@ -59,6 +59,8 @@ mat4 LowRenderer::Camera::getPerspective(const bool orthographic) const
 
 void LowRenderer::Camera::start()
 {
+	Object::start();
+
 	GLFWwindow* window = Application::getInstance()->window;
 	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 	glfwGetCursorPos(window, &mouseX, &mouseY);
@@ -68,9 +70,9 @@ void LowRenderer::Camera::start()
 
 void LowRenderer::Camera::update()
 {
-	GLFWwindow* window = Application::getInstance()->window;
+	Object::update();
 
-	glfwGetCursorPos(window, &mouseX, &mouseY);
+	GLFWwindow* window = Application::getInstance()->window;
 
 	float& pitch = transform.rotation.x;
 	float& yaw = transform.rotation.y;
@@ -81,6 +83,8 @@ void LowRenderer::Camera::update()
 							(glfwGetKey(window, GLFW_KEY_D) - glfwGetKey(window, GLFW_KEY_A)) * moveSpeed * sinf(yaw * TORAD);
 
 	transform.position.y += (glfwGetKey(window, GLFW_KEY_SPACE) - glfwGetKey(window, GLFW_KEY_LEFT_CONTROL)) * moveSpeed;
+
+	glfwGetCursorPos(window, &mouseX, &mouseY);
 
 	pitch += (float)(mouseY - oldY) * mouseSensitivity;
 	yaw -= (float)(mouseX - oldX) * mouseSensitivity;

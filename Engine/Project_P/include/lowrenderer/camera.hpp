@@ -1,17 +1,15 @@
 #pragma once
 
-#include "core/math/math.hpp"
-
-#include <glad/glad.h>
-#include <GLFW/glfw3.h>
-
 #include "lowrenderer/object.hpp"
+#include "core/math/math.hpp"
 
 namespace LowRenderer
 {
 	class Camera : public Object
 	{
 	private:
+		bool	active = false;
+
 		float	mouseSensitivity = 0.1f;
 		float	moveSpeed = 1.f;
 		double	mouseX = 0.f, mouseY = 0.f;
@@ -36,15 +34,22 @@ namespace LowRenderer
 		mat4	getPerspective(const bool orthographic) const;
 
 	public:
-		void	start() override;
-		void	update() override;
+		virtual void	start() override;
+		virtual void	update() override;
 
 	public:
 		Camera();
 
-		mat4	getVPMatrix() const;
-		mat4	getMVPMatrix(const mat4& modelMatrix) const;
+		inline void		setActive(bool active);
+
+		mat4			getVPMatrix() const;
+		mat4			getMVPMatrix(const mat4& modelMatrix) const;
 	};
 }
 
 using namespace LowRenderer;
+
+inline void LowRenderer::Camera::setActive(bool active)
+{
+	this->active = active;
+}

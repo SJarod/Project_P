@@ -1,6 +1,18 @@
 #include "lowrenderer/gameobject.hpp"
 
-void LowRenderer::GameObject::draw(const mat4& VP) const
+void LowRenderer::GameObject::start()
 {
-	model.draw(VP);
+	Object::start();
+}
+
+void LowRenderer::GameObject::update()
+{
+	Object::update();
+}
+
+void LowRenderer::GameObject::render()
+{
+	Object::render();
+
+	model.draw();
 }

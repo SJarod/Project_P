@@ -11,13 +11,15 @@ namespace Core
 		class Graph
 		{
 		private:
-			std::vector<Scene*> scns;
+			Scene* scene = nullptr;
 
 		public:
 			Graph();
 			~Graph();
 
-			Scene& getScene(const unsigned int index) const;
+			void loadScene(const char* filename);
+
+			Scene* getCurrentScene() const;
 		};
 	}
 }

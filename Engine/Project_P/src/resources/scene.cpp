@@ -1,25 +1,27 @@
 #include "resources/scene.hpp"
 
-#include "core/api/application.hpp"
+#include "utils/memleaks.hpp"
 
-Resources::Scene::Scene()
+Resources::Scene::Scene(const char* sn)
+    : sceneName(sn)
 {
-	cams.push_back(new Camera);
-
-	gos.push_back(new GameObject);
 }
 
 Resources::Scene::~Scene()
 {
-	for (Camera* cam : cams)
-		delete cam;
+    for (Object* obj : objs)
+        delete obj;
 
-	cams.clear();
+    objs.clear();
+}
 
-	for (GameObject* go : gos)
-		delete go;
+void Resources::Scene::loadSceneFromFile()
+{
+    debugCam = new Camera;
+    viewCam = debugCam;
+    objs.push_back(debugCam);
 
-	gos.clear();
+    objs.push_back(new GameObject);
 }
 
 void Resources::Scene::startScene()
@@ -28,8 +30,6 @@ void Resources::Scene::startScene()
     {
         obj->start();
     }
-
-    cams[(int)mode]->start();
 }
 
 void Resources::Scene::updateScene()
@@ -38,11 +38,9 @@ void Resources::Scene::updateScene()
     {
         obj->update();
     }
-
-    cams[(int)mode]->update();
 }
 
-void Resources::Scene::displayScene() const
+void Resources::Scene::renderScene() const
 {
     /* Render here */
     glClearColor(0.f, 0.f, 0.f, 1.0f);
@@ -50,8 +48,8 @@ void Resources::Scene::displayScene() const
 
     glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
-    for (GameObject* go : gos)
+    for (Object* obj : objs)
     {
-        go->draw(cams[(int)mode]->getVPMatrix());
+        obj->render();
     }
 }

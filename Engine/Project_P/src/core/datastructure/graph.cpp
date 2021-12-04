@@ -2,18 +2,20 @@
 
 Core::DataStructure::Graph::Graph()
 {
-	scns.push_back(new Scene);
 }
 
 Core::DataStructure::Graph::~Graph()
 {
-	for (Scene* scn : scns)
-		delete scn;
-
-	scns.clear();
+	delete scene;
 }
 
-Scene& Core::DataStructure::Graph::getScene(const unsigned int index) const
+void Core::DataStructure::Graph::loadScene(const char* filename)
 {
-	return *scns[index];
+	scene = new Scene(filename);
+	getCurrentScene()->loadSceneFromFile();
+}
+
+Scene* Core::DataStructure::Graph::getCurrentScene() const
+{
+	return scene;
 }

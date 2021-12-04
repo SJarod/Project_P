@@ -8,32 +8,29 @@
 
 namespace Resources
 {
-	enum class SceneMode
-	{
-		DEBUG = 0,
-		GAME = 1,
-	};
-
 	class Scene
 	{
 	private:
+		const char* sceneName;
 
 	public:
-		std::vector<Object*>		objs;
+		std::vector<Object*> objs;
 
-		//remove
-		std::vector<Camera*>		cams;
-		std::vector<GameObject*>	gos;
+		Camera* debugCam = nullptr;
+		Camera* gameCam = nullptr;
+		//the used camera
+		Camera* viewCam = nullptr;
 
-		SceneMode					mode = SceneMode::DEBUG;
-
-		Scene();
+		Scene() = default;
+		Scene(const char* sceneName);
 		~Scene();
+
+		void loadSceneFromFile();
 
 		void startScene();
 		void updateScene();
 
-		void displayScene() const;
+		void renderScene() const;
 	};
 }
 
