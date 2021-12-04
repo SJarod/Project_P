@@ -1,14 +1,13 @@
 #include "lowrenderer/model.hpp"
 
-#include "core/engine/application.hpp"
-
 #include "utils/memleaks.hpp"
 
 LowRenderer::Model::Model()
 {
 	shader = new Shader("base");
 	mesh = new Mesh;
-	renderCam = Application::getInstance()->graph->getCurrentScene()->viewCam;
+	mesh->loadMesh("the_noble_craftsman.obj");
+	mesh->transform.scale = { 10.f, 10.f, 10.f };
 }
 
 LowRenderer::Model::~Model()

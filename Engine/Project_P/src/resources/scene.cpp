@@ -46,8 +46,6 @@ void Resources::Scene::renderScene() const
     glClearColor(0.f, 0.f, 0.f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT);
 
-    glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-
     for (Object* obj : objs)
     {
         obj->render();

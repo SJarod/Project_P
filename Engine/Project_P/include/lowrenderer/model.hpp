@@ -20,9 +20,15 @@ namespace LowRenderer
 		Model();
 		~Model();
 
+		inline void setRenderCam(Camera* cam);
 		//view projection matrix as argument (model matrix is automatically used with mesh)
 		void draw() const;
 	};
 }
 
 using namespace LowRenderer;
+
+inline void LowRenderer::Model::setRenderCam(Camera* cam)
+{
+	renderCam = cam;
+}

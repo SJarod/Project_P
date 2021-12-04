@@ -31,13 +31,14 @@ int Core::Engine::Application::init()
 
     //initializing graph
     graph = new Graph;
-    graph->loadScene("");
 
     return 0;
 }
 
 void Core::Engine::Application::gameLoop()
 {
+    graph->loadScene("");
+
     graph->getCurrentScene()->startScene();
 
     /* Loop until the user closes the window */

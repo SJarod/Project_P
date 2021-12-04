@@ -10,6 +10,8 @@
 #include "physics/primitives3/box.hpp"
 #include "physics/primitives3/sphere.hpp"
 
+#include <string>
+
 namespace Resources
 {
 	class Vertex
@@ -23,20 +25,20 @@ namespace Resources
 	class Mesh
 	{
 	private:
-		std::vector<float>			vertices;
-		//std::vector<Vertex>			vertices;
-		std::vector<unsigned int>	indices;
+		std::vector<float>	vertices;
+		//std::vector<Vertex> vertices;
+		std::vector<uint>	indices;
 
-		GLuint		VAO;
+		GLuint VAO;
 
 		void generateMesh();
 
 	public:
-		Transform	transform;
+		Transform transform;
 
 		~Mesh();
 
-		bool loadMesh(const char* filename);
+		bool loadMesh(const std::string& filename);
 		bool loadMesh(Box* b);
 		bool loadMesh(Sphere* sph);
 

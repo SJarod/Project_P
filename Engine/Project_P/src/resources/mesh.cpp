@@ -1,5 +1,10 @@
 #include "resources/mesh.hpp"
 
+#include <fstream>
+#include <sstream>
+
+#include <iostream>
+
 void Resources::Mesh::generateMesh()
 {
     //VBO
@@ -33,9 +38,99 @@ Resources::Mesh::~Mesh()
 	glDeleteVertexArrays(1, &VAO);
 }
 
-bool Resources::Mesh::loadMesh(const char* filename)
+bool Resources::Mesh::loadMesh(const std::string& filename)
 {
-    return false;
+    std::ifstream file;
+    file.open("assets/" + filename);
+    if (!file.is_open())
+    {
+        std::cout << "could not open obj file : " << filename << std::endl;
+        return false;
+    }
+
+    while (file)
+    {
+        std::string line;
+        std::getline(file, line);
+
+        switch (line[0])
+        {
+        //submesh
+        case 'o':
+            break;
+        //vertex
+        case 'v':
+        {
+            switch (line[1])
+            {
+            //vertex pos
+            case ' ':
+            {
+                std::istringstream iss(line.substr(2));
+
+                for (int i = 0; i < 3; ++i)
+                {
+                    float pos;
+                    iss >> pos;
+                    vertices.push_back(pos);
+                }
+
+                break;
+            }
+            //texture uv
+            case 't':
+                break;
+            //vertex normal
+            case 'n':
+                break;
+            }
+
+            break;
+        }
+        //mtl
+        case 'u':
+        {
+            if (line.substr(0, 7) == "usemtl")
+            {
+
+            }
+
+            break;
+        }
+        //face
+        case 'f':
+        {
+            if (line[1] == ' ')
+            {
+                std::istringstream iss(line.substr(2));
+
+                for (int i = 0; i < 3; ++i)
+                {
+                    //indices
+                    uint v, t, n;
+                    iss >> v;
+                    iss.ignore();
+                    iss >> t;
+                    iss.ignore();
+                    iss >> n;
+                    iss.ignore();
+
+                    indices.push_back(v - 1);
+                }
+            }
+
+            break;
+        }
+        default:
+            break;
+        }
+    }
+
+    generateMesh();
+
+    std::cout << "successfully loaded obj file : " << filename << std::endl;
+
+    return true;
 }
 
 bool Resources::Mesh::loadMesh(Box* b)
