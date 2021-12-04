@@ -96,7 +96,7 @@
     <ClCompile Include="src\utils\utils.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
-    <ClCompile Include="src\core\api\application.cpp">
+    <ClCompile Include="src\core\engine\application.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
     <ClCompile Include="src\glad.c">
@@ -129,7 +129,7 @@
     <ClInclude Include="include\resources\mesh.hpp">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
-    <ClInclude Include="include\core\api\application.hpp">
+    <ClInclude Include="include\core\engine\application.hpp">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
     <ClInclude Include="include\lowrenderer\model.hpp">

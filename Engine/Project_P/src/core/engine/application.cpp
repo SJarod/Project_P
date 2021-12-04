@@ -1,8 +1,8 @@
-#include "core/api/application.hpp"
+#include "core/engine/application.hpp"
 
 #include <iostream>
 
-int Core::API::Application::init()
+int Core::Engine::Application::init()
 {
     /* Initialize the library */
     if (!glfwInit())
@@ -36,7 +36,7 @@ int Core::API::Application::init()
     return 0;
 }
 
-void Core::API::Application::gameLoop()
+void Core::Engine::Application::gameLoop()
 {
     graph->getCurrentScene()->startScene();
 
@@ -54,14 +54,14 @@ void Core::API::Application::gameLoop()
     }
 }
 
-Core::API::Application::~Application()
+Core::Engine::Application::~Application()
 {
     delete graph;
 
     glfwTerminate();
 }
 
-void Core::API::Application::run()
+void Core::Engine::Application::run()
 {
     if (init() < 0)
     {
@@ -72,7 +72,7 @@ void Core::API::Application::run()
     gameLoop();
 }
 
-float Core::API::Application::getAspectRatio() const
+float Core::Engine::Application::getAspectRatio() const
 {
     return (float)SCRN_WIDTH / (float)SCRN_HEIGHT;
 }

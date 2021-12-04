@@ -10,7 +10,7 @@
 
 namespace Core
 {
-	namespace API
+	namespace Engine
 	{
 		class Application : public Singleton<Application>
 		{
@@ -38,4 +38,4 @@ namespace Core
 	}
 }
 
-using namespace Core::API;
+using namespace Core::Engine;

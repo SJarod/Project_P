@@ -7,6 +7,9 @@
 
 #include "physics/transform.hpp"
 
+#include "physics/primitives3/box.hpp"
+#include "physics/primitives3/sphere.hpp"
+
 namespace Resources
 {
 	class Mesh
@@ -20,8 +23,11 @@ namespace Resources
 	public:
 		Transform	transform;
 
-		Mesh();
 		~Mesh();
+
+		bool loadMesh(const char* filename);
+		bool loadMesh(Box* b);
+		bool loadMesh(Sphere* sph);
 
 		void render() const;
 	};
