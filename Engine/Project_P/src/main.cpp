@@ -5,7 +5,7 @@ int main()
     Application* app = Application::getInstance();
     app->run();
 
-    app->end();
+    app->destroy();
 
     return 0;
 }

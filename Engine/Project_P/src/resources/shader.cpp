@@ -10,7 +10,7 @@ Resources::Shader::Shader(const std::string& shaderName)
 
     if (!vertStream.is_open() || !fragStream.is_open())
     {
-        std::cout << "could not load " << shaderName << " shader source files" << std::endl;
+        std::cout << "could not open shader files : " << shaderName << std::endl;
         return;
     }
 
@@ -58,7 +58,7 @@ Resources::Shader::Shader(const std::string& shaderName)
     glDeleteShader(vertexShader);
     glDeleteShader(fragmentShader);
 
-    std::cout << shaderName << " shader successfully loaded" << std::endl;
+    std::cout << "successfully loaded shader files : " << shaderName << std::endl;
 }
 
 Resources::Shader::~Shader()

@@ -1,13 +1,13 @@
 #include "core/math/math.hpp"
 #include "core/math/quaternion.hpp"
 
-Quaternion Core::Math::vec3::q() const
+Quaternion Math::vec3::q() const
 {
 	Quaternion q = { 0, x, y, z };
 	return q;
 }
 
-vec3 Core::Math::crossProduct(const vec3& a, const vec3& b)
+vec3 Math::crossProduct(const vec3& a, const vec3& b)
 {
 	vec3 v;
 	v.x = a.y * b.z - a.z * b.y;
@@ -16,7 +16,7 @@ vec3 Core::Math::crossProduct(const vec3& a, const vec3& b)
 	return v;
 }
 
-vec2 Core::Math::vec2Rotation(const vec2& v, const float& angle)
+vec2 Math::vec2Rotation(const vec2& v, const float& angle)
 {
 	float a = angle * TORAD;
 	float x = cosf(a) * v.x - sinf(a) * v.y;
@@ -25,7 +25,7 @@ vec2 Core::Math::vec2Rotation(const vec2& v, const float& angle)
 	return { x, y };
 }
 
-mat4 Core::Math::translateMatrix(const vec3& pos)
+mat4 Math::translateMatrix(const vec3& pos)
 {
 	return mat4{
 		1.f, 0.f, 0.f, pos.x,
@@ -35,7 +35,7 @@ mat4 Core::Math::translateMatrix(const vec3& pos)
 	};
 }
 
-mat4 Core::Math::rotateXMatrix(const float& pitch)
+mat4 Math::rotateXMatrix(const float& pitch)
 {
 	float a = pitch * TORAD;
 	return mat4{
@@ -46,7 +46,7 @@ mat4 Core::Math::rotateXMatrix(const float& pitch)
 	};
 }
 
-mat4 Core::Math::rotateYMatrix(const float& yaw)
+mat4 Math::rotateYMatrix(const float& yaw)
 {
 	float a = yaw * TORAD;
 	return mat4{
@@ -57,7 +57,7 @@ mat4 Core::Math::rotateYMatrix(const float& yaw)
 	};
 }
 
-mat4 Core::Math::rotateZMatrix(const float& roll)
+mat4 Math::rotateZMatrix(const float& roll)
 {
 	float a = roll * TORAD;
 	return mat4{
@@ -68,7 +68,7 @@ mat4 Core::Math::rotateZMatrix(const float& roll)
 	};
 }
 
-mat4 Core::Math::scaleMatrix(const vec3& scale)
+mat4 Math::scaleMatrix(const vec3& scale)
 {
 	return mat4{
 		scale.x, 0.f, 0.f, 0.f,
@@ -78,41 +78,44 @@ mat4 Core::Math::scaleMatrix(const vec3& scale)
 	};
 }
 
-Core::Math::vec2::operator std::string () const
+std::ostream& Math::operator<<(std::ostream& os, const vec2& v)
 {
-	std::string str = "---vec2---\n" + std::to_string(x) + ", " + std::to_string(y);
-	return str;
+	os << "---vec2---" << std::endl;
+	os << v.x << ", " << v.y;
+	return os;
 }
 
-Core::Math::vec3::operator std::string () const
+std::ostream& Math::operator<<(std::ostream& os, const vec3& v)
 {
-	std::string str = "---vec3---\n" + std::to_string(x) + ", " + std::to_string(y) + ", " + std::to_string(z);
-	return str;
+	os << "---vec3---" << std::endl;
+	os << v.x << ", " << v.y << ", " << v.z;
+	return os;
 }
 
-Core::Math::vec4::operator std::string () const
+std::ostream& Math::operator<<(std::ostream& os, const vec4& v)
 {
-	std::string str = "---vec4---\n" + std::to_string(x) + ", " + std::to_string(y) + ", " + std::to_string(z) + ", " + std::to_string(w);
-	return str;
+	os << "---vec4---" << std::endl;
+	os << v.x << ", " << v.y << ", " << v.z << ", " << v.w;
+	return os;
 }
 
-Core::Math::mat3::operator std::string () const
+std::ostream& Math::operator<<(std::ostream& os, const mat3& m)
 {
-	std::string str = "---mat3---\n";
-	str += std::to_string(c[0].x) + ", " + std::to_string(c[0].y) + ", " + std::to_string(c[0].z) + "\n";
-	str += std::to_string(c[1].x) + ", " + std::to_string(c[1].y) + ", " + std::to_string(c[1].z) + "\n";
-	str += std::to_string(c[2].x) + ", " + std::to_string(c[2].y) + ", " + std::to_string(c[2].z);
+	os << "---mat3---" << std::endl;
+	os << m.c[0].x << ", " << m.c[0].y << ", " << m.c[0].z << std::endl;
+	os << m.c[1].x << ", " << m.c[1].y << ", " << m.c[1].z << std::endl;
+	os << m.c[2].x << ", " << m.c[2].y << ", " << m.c[2].z;
 
-	return str;
+	return os;
 }
 
-Core::Math::mat4::operator std::string () const
+std::ostream& Math::operator<<(std::ostream& os, const mat4& m)
 {
-	std::string str = "---mat4---\n";
-	str += std::to_string(c[0].x) + ", " + std::to_string(c[0].y) + ", " + std::to_string(c[0].z) + ", " + std::to_string(c[0].w) + "\n";
-	str += std::to_string(c[1].x) + ", " + std::to_string(c[1].y) + ", " + std::to_string(c[1].z) + ", " + std::to_string(c[1].w) + "\n";
-	str += std::to_string(c[2].x) + ", " + std::to_string(c[2].y) + ", " + std::to_string(c[2].z) + ", " + std::to_string(c[2].w) + "\n";
-	str += std::to_string(c[3].x) + ", " + std::to_string(c[3].y) + ", " + std::to_string(c[3].z) + ", " + std::to_string(c[3].w);
+	os << "---mat4---" << std::endl;
+	os << m.c[0].x << ", " << m.c[0].y << ", " << m.c[0].z << ", " << m.c[0].w << std::endl;
+	os << m.c[1].x << ", " << m.c[1].y << ", " << m.c[1].z << ", " << m.c[1].w << std::endl;
+	os << m.c[2].x << ", " << m.c[2].y << ", " << m.c[2].z << ", " << m.c[2].w << std::endl;
+	os << m.c[3].x << ", " << m.c[3].y << ", " << m.c[3].z << ", " << m.c[3].w;
 
-	return str;
+	return os;
 }

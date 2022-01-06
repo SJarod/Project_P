@@ -9,6 +9,7 @@ namespace LowRenderer
 	{
 	private:
 		bool	active = false;
+		bool	isOrthographic = true;
 
 		float	mouseSensitivity = 0.1f;
 		float	moveSpeed = 1.f;
@@ -18,20 +19,13 @@ namespace LowRenderer
 		//aspect ratio
 		float	aspect = 16.f / 9.f;
 		float	fovY = 75.f;
+		float	orthographicRange = 10.f;
 
 		float	near = 0.001f;
 		float	far = 1000.f;
 
-		mat4	frustum(const float& left, const float& right, const float& bot, const float& top, bool orthographic) const;
-
 		mat4	getViewMatrix() const;
-
-		//projection matrix (using frustum and 3D)
-		mat4	getProjMatrix() const;
-		//orthographic matrix
-		mat4	getOrthMatrix() const;
-		//choose perspective matrix
-		mat4	getPerspective(const bool orthographic) const;
+		mat4	getProjMatrix(const bool ortho) const;
 
 	public:
 		virtual void	start() override;
