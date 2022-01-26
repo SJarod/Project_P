@@ -1,31 +1,24 @@
-#visual studio
+# Visual Studio
 .vs
+*.user
 
-#compilation files
+# resources
+[Aa]sset
+[Aa]ssets
+*.obj
+*.png
+*.jpg
+
+# Build results
+[Dd]ebug
+[Rr]elease
+[Rr]eleases
 x64
-Debug
-Release
 
-#build
-[Bb]uild
-[Bb]uilds
-
-#git merge original files
+# git merge original files
 *.orig
 
-#archives
+# archives
 *.zip
 *.rar
 *.7z
-
-#resources
-[Aa]sset
-[Aa]ssets
-#[Rr]esources
-!Engine/Project_P/include/resources
-!Engine/Project_P/src/resources
-!Engine/Project_P/resources/shaders
-
-#images
-*.png
-*.jpg
