@@ -5,7 +5,7 @@
 #include "resources/texture.hpp"
 #include "lowrenderer/camera.hpp"
 
-#include "core/math/math.hpp"
+#include "math/math.hpp"
 
 namespace LowRenderer
 {

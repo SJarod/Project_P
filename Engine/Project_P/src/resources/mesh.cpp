@@ -183,7 +183,7 @@ bool Resources::Mesh::loadMesh(const std::string& filename)
     return true;
 }
 
-bool Resources::Mesh::loadMesh(const Box& b)
+bool Resources::Mesh::loadMesh(const Primitives3::Box& b)
 {
     std::vector<float>  vertices;
     std::vector<uint>   indices;
@@ -217,7 +217,7 @@ bool Resources::Mesh::loadMesh(const Box& b)
     return true;
 }
 
-bool Resources::Mesh::loadMesh(const Sphere& sph)
+bool Resources::Mesh::loadMesh(const Primitives3::Sphere& sph)
 {
     std::vector<float>  vertices;
     std::vector<uint>   indices;

@@ -5,7 +5,7 @@
 
 #include <string>
 
-#include "core/math/math.hpp"
+#include "math/math.hpp"
 
 namespace Resources
 {

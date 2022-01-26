@@ -1,7 +1,7 @@
 #pragma once
 
 #include "lowrenderer/object.hpp"
-#include "core/math/math.hpp"
+#include "math/math.hpp"
 
 namespace LowRenderer
 {
@@ -9,7 +9,7 @@ namespace LowRenderer
 	{
 	private:
 		bool	active = false;
-		bool	isOrthographic = true;
+		bool	isOrthographic = false;
 
 		float	mouseSensitivity = 0.1f;
 		float	moveSpeed = 1.f;

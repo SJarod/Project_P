@@ -3,7 +3,7 @@
 #include "lowrenderer/object.hpp"
 #include "lowrenderer/model.hpp"
 
-#include "core/math/math.hpp"
+#include "math/math.hpp"
 
 namespace LowRenderer
 {

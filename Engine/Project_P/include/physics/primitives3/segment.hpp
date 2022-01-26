@@ -1,6 +1,6 @@
 #pragma once
 
-#include "core/math/math.hpp"
+#include "math/math.hpp"
 
 namespace Physics
 {

@@ -1,7 +1,7 @@
 #pragma once
 
-#include "core/math/math.hpp"
-#include "core/math/quaternion.hpp"
+#include "math/math.hpp"
+#include "math/quaternion.hpp"
 
 namespace Physics
 {

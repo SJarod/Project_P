@@ -11,11 +11,15 @@ LowRenderer::Camera::Camera()
 
 mat4 LowRenderer::Camera::getViewMatrix() const
 {
+	using namespace Math3;
+
 	return rotateXMatrix(transform.rotation.x) * rotateYMatrix(-transform.rotation.y) * translateMatrix(-transform.position);
 }
 
 mat4 LowRenderer::Camera::getProjMatrix(const bool ortho) const
 {
+	using namespace Math3;
+
 	if (ortho)
 		return orthographic(-orthographicRange, orthographicRange, -orthographicRange, orthographicRange, near, far);
 
@@ -53,7 +57,7 @@ void LowRenderer::Camera::update()
 
 	pitch += (float)(mouseY - oldY) * mouseSensitivity;
 	yaw -= (float)(mouseX - oldX) * mouseSensitivity;
-	clamp(pitch, -90.f, 90.f);
+	pitch = Math::clamp(pitch, -90.f, 90.f);
 
 	oldY = (float)mouseY;
 	oldX = (float)mouseX;

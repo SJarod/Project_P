@@ -41,8 +41,8 @@ namespace Resources
 		~Mesh();
 
 		bool loadMesh(const std::string& filename);
-		bool loadMesh(const Box& b);
-		bool loadMesh(const Sphere& sph);
+		bool loadMesh(const Primitives3::Box& b);
+		bool loadMesh(const Primitives3::Sphere& sph);
 
 		void render() const;
 	};

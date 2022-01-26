@@ -5,7 +5,7 @@
 
 #include "utils/singleton.hpp"
 
-#include "core/math/math.hpp"
+#include "math/math.hpp"
 #include "core/datastructure/graph.hpp"
 
 namespace Core

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "core/math/math.hpp"
+#include "math/math.hpp"
 
 #include <vector>
 
@@ -25,4 +25,4 @@ namespace Physics
 	}
 }
 
-using namespace Physics::Primitives3;
+using namespace Physics;

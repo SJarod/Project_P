@@ -152,17 +152,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\externals\stb_image.c" />
-    <ClCompile Include="src\resources\texture.cpp" />
-    <ClCompile Include="src\lowrenderer\object.cpp" />
-    <ClCompile Include="src\core\engine\application.cpp" />
-    <ClCompile Include="src\core\datastructure\graph.cpp" />
-    <ClCompile Include="src\core\math\math.cpp" />
-    <ClCompile Include="src\core\math\quaternion.cpp" />
-    <ClCompile Include="src\glad.c" />
-    <ClCompile Include="src\lowrenderer\camera.cpp" />
-    <ClCompile Include="src\lowrenderer\gameobject.cpp" />
-    <ClCompile Include="src\lowrenderer\model.cpp" />
-    <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\math\math.cpp" />
+    <ClCompile Include="src\math\quaternion.cpp" />
     <ClCompile Include="src\physics\primitives2\circle.cpp" />
     <ClCompile Include="src\physics\primitives2\concavepolygon.cpp" />
     <ClCompile Include="src\physics\primitives2\convexpolygon.cpp" />
@@ -179,6 +170,15 @@
     <ClCompile Include="src\physics\referential2.cpp" />
     <ClCompile Include="src\physics\referential3.cpp" />
     <ClCompile Include="src\physics\transform.cpp" />
+    <ClCompile Include="src\resources\texture.cpp" />
+    <ClCompile Include="src\lowrenderer\object.cpp" />
+    <ClCompile Include="src\core\engine\application.cpp" />
+    <ClCompile Include="src\core\datastructure\graph.cpp" />
+    <ClCompile Include="src\glad.c" />
+    <ClCompile Include="src\lowrenderer\camera.cpp" />
+    <ClCompile Include="src\lowrenderer\gameobject.cpp" />
+    <ClCompile Include="src\lowrenderer\model.cpp" />
+    <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\resources\mesh.cpp" />
     <ClCompile Include="src\resources\scene.cpp" />
     <ClCompile Include="src\resources\shader.cpp" />
@@ -187,18 +187,20 @@
     <ClCompile Include="src\utils\utils.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="include\math\math.inl" />
     <None Include="resources\shaders\base.frag" />
     <None Include="resources\shaders\base.vert" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\core\engine\application.hpp" />
     <ClInclude Include="include\core\datastructure\graph.hpp" />
-    <ClInclude Include="include\core\math\math.hpp" />
-    <ClInclude Include="include\core\math\quaternion.hpp" />
     <ClInclude Include="include\lowrenderer\camera.hpp" />
     <ClInclude Include="include\lowrenderer\gameobject.hpp" />
     <ClInclude Include="include\lowrenderer\model.hpp" />
     <ClInclude Include="include\lowrenderer\object.hpp" />
+    <ClInclude Include="include\math\math.hpp" />
+    <ClInclude Include="include\math\quaternion.hpp" />
+    <ClInclude Include="include\math\types.hpp" />
     <ClInclude Include="include\physics\collision.hpp" />
     <ClInclude Include="include\physics\primitives2\aabb2.hpp" />
     <ClInclude Include="include\physics\primitives2\circle.hpp" />

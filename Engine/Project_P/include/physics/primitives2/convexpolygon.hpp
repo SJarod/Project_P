@@ -1,8 +1,8 @@
 #pragma once
 
-#include "core/math/math.hpp"
-
 #include <vector>
+
+#include "math/math.hpp"
 
 namespace Physics
 {
@@ -21,4 +21,4 @@ namespace Physics
     }
 }
 
-using namespace Physics::Primitives2;
+using namespace Physics;
