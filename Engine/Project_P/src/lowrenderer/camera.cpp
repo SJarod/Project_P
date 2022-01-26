@@ -27,8 +27,6 @@ mat4 LowRenderer::Camera::getProjMatrix() const
 
 void LowRenderer::Camera::start()
 {
-	Object::start();
-
 	GLFWwindow* window = Application::getInstance()->window;
 	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 	glfwGetCursorPos(window, &mouseX, &mouseY);
@@ -38,8 +36,6 @@ void LowRenderer::Camera::start()
 
 void LowRenderer::Camera::update()
 {
-	Object::update();
-
 	GLFWwindow* window = Application::getInstance()->window;
 
 	float& pitch = transform.rotation.x;

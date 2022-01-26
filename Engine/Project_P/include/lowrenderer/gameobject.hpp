@@ -2,12 +2,12 @@
 
 #include "math/math.hpp"
 
-#include "lowrenderer/object.hpp"
+#include "interfaces/object.hpp"
 #include "lowrenderer/model.hpp"
 
 namespace LowRenderer
 {
-	class GameObject : public Object
+	class GameObject : public Interface::ObjectI
 	{
 	private:
 		Model model;

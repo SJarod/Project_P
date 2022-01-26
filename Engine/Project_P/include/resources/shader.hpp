@@ -23,7 +23,7 @@ namespace Resources
 		void uniformBool(const bool& b, const char* name);		//pass bool uniform to shader
 		void uniformFloat(const float& f, const char* name);	//pass float uniform to shader
 		void uniformVec3(const vec3& v, const char* name);		//pass vec3 uniform to shader
-		void uniformMat4(const mat4& m, const bool transpose, const char* name);		//pass mat4 uniform to shader
+		void uniformMat4(const mat4& m, const bool transpose, const char* name);	//pass mat4 uniform to shader
 	};
 }
 

@@ -152,6 +152,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\externals\stb_image.c" />
+    <ClCompile Include="src\lowrenderer\rendererbase.cpp" />
     <ClCompile Include="src\math\math.cpp" />
     <ClCompile Include="src\math\quaternion.cpp" />
     <ClCompile Include="src\physics\primitives2\circle.cpp" />
@@ -170,8 +171,6 @@
     <ClCompile Include="src\physics\referential2.cpp" />
     <ClCompile Include="src\physics\referential3.cpp" />
     <ClCompile Include="src\physics\transform.cpp" />
-    <ClCompile Include="src\resources\texture.cpp" />
-    <ClCompile Include="src\lowrenderer\object.cpp" />
     <ClCompile Include="src\core\engine\application.cpp" />
     <ClCompile Include="src\core\datastructure\graph.cpp" />
     <ClCompile Include="src\glad.c" />
@@ -179,7 +178,6 @@
     <ClCompile Include="src\lowrenderer\gameobject.cpp" />
     <ClCompile Include="src\lowrenderer\model.cpp" />
     <ClCompile Include="src\main.cpp" />
-    <ClCompile Include="src\resources\mesh.cpp" />
     <ClCompile Include="src\resources\scene.cpp" />
     <ClCompile Include="src\resources\shader.cpp" />
     <ClCompile Include="src\utils\memleaks.cpp" />
@@ -194,10 +192,12 @@
   <ItemGroup>
     <ClInclude Include="include\core\engine\application.hpp" />
     <ClInclude Include="include\core\datastructure\graph.hpp" />
+    <ClInclude Include="include\interfaces\renderer.hpp" />
     <ClInclude Include="include\lowrenderer\camera.hpp" />
     <ClInclude Include="include\lowrenderer\gameobject.hpp" />
     <ClInclude Include="include\lowrenderer\model.hpp" />
-    <ClInclude Include="include\lowrenderer\object.hpp" />
+    <ClInclude Include="include\interfaces\object.hpp" />
+    <ClInclude Include="include\lowrenderer\rendererbase.hpp" />
     <ClInclude Include="include\math\math.hpp" />
     <ClInclude Include="include\math\quaternion.hpp" />
     <ClInclude Include="include\math\types.hpp" />
@@ -219,6 +219,7 @@
     <ClInclude Include="include\physics\referential2.hpp" />
     <ClInclude Include="include\physics\referential3.hpp" />
     <ClInclude Include="include\physics\transform.hpp" />
+    <ClInclude Include="include\resources\material.hpp" />
     <ClInclude Include="include\resources\mesh.hpp" />
     <ClInclude Include="include\resources\scene.hpp" />
     <ClInclude Include="include\resources\shader.hpp" />

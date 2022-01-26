@@ -1,21 +1,23 @@
 #pragma once
 
-#include <glad/glad.h>
-#include <GLFW/glfw3.h>
-
-#include <string>
-
 namespace Resources
 {
+	struct GPUTexture {};
+
+	struct TextureDim
+	{
+		int width;
+		int height;
+	};
+
 	class Texture
 	{
-	private:
-		GLuint data;
-
 	public:
-		bool loadTexture(const std::string& filename);
-
-		void bindTexture() const;
+		//cpu side
+		unsigned char*	data;
+		TextureDim		dim;
+		//gpu side
+		GPUTexture* gpu;
 	};
 }
 

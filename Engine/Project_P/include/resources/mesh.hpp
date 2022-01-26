@@ -1,15 +1,8 @@
 #pragma once
 
 #include <vector>
-#include <string>
-
-#include <glad/glad.h>
-#include <GLFW/glfw3.h>
 
 #include "physics/transform.hpp"
-
-#include "physics/primitives3/box.hpp"
-#include "physics/primitives3/sphere.hpp"
 
 namespace Resources
 {
@@ -21,29 +14,18 @@ namespace Resources
 		vec3 n;		//vertex normal
 	};
 
+	struct GPUMesh {};
+
 	class Mesh
 	{
-	private:
+	public:
+		//cpu side
 		std::vector<Vertex> vertices;
-
-		GLuint VAO;
-
-		void assembleVertices(const std::vector<float3>& rawV,
-						      const std::vector<uint3>&  rawI,
-						      const std::vector<float2>& rawVt = std::vector<float2>(),
-						      const std::vector<float3>& rawVn = std::vector<float3>());
-		void generateMeshVAO();
+		//gpu side
+		GPUMesh* gpu;
 
 	public:
 		Transform transform;
-
-		~Mesh();
-
-		bool loadMesh(const std::string& filename);
-		bool loadMesh(const Primitives3::Box& b);
-		bool loadMesh(const Primitives3::Sphere& sph);
-
-		void render() const;
 	};
 }
 

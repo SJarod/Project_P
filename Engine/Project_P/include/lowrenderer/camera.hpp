@@ -1,11 +1,11 @@
 #pragma once
 
 #include "math/math.hpp"
-#include "lowrenderer/object.hpp"
+#include "interfaces/object.hpp"
 
 namespace LowRenderer
 {
-	class Camera : public Object
+	class Camera : public Interface::ObjectI
 	{
 	private:
 		bool	active = false;

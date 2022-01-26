@@ -2,7 +2,6 @@
 
 #include "math/math.hpp"
 
-#include "resources/shader.hpp"
 #include "resources/mesh.hpp"
 #include "resources/texture.hpp"
 #include "lowrenderer/camera.hpp"
@@ -12,14 +11,12 @@ namespace LowRenderer
 	class Model
 	{
 	private:
-		Shader*		shader;
-		Mesh*		mesh;
-		Texture*	texture;
+		Mesh*		mesh = nullptr;
+		Texture*	texture = nullptr;
 
 		Camera*		renderCam = nullptr;
 
 	public:
-		Model();
 		~Model();
 
 		inline void setRenderCam(Camera* cam);
