@@ -1,9 +1,8 @@
-#include "resources/mesh.hpp"
-
+#include <iostream>
 #include <fstream>
 #include <sstream>
 
-#include <iostream>
+#include "resources/mesh.hpp"
 
 void Resources::Mesh::assembleVertices(const std::vector<float3>& rawV,
                                        const std::vector<uint3>&  rawI,

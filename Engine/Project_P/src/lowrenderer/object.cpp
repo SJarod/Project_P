@@ -1,6 +1,6 @@
-#include "lowrenderer/object.hpp"
-
 #include <iostream>
+
+#include "lowrenderer/object.hpp"
 
 void LowRenderer::Object::start()
 {

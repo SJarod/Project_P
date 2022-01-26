@@ -1,6 +1,6 @@
-#include "lowrenderer/gameobject.hpp"
-
 #include "core/engine/application.hpp"
+
+#include "lowrenderer/gameobject.hpp"
 
 void LowRenderer::GameObject::start()
 {

@@ -188,8 +188,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="include\math\math.inl" />
-    <None Include="resources\shaders\base.frag" />
-    <None Include="resources\shaders\base.vert" />
+    <None Include="resources\shaders\base.fs" />
+    <None Include="resources\shaders\base.vs" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\core\engine\application.hpp" />

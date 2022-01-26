@@ -1,10 +1,8 @@
-#include "resources/texture.hpp"
-
+#include <iostream>
+#include <string>
 #include "stb_image.h"
 
-#include <string>
-
-#include <iostream>
+#include "resources/texture.hpp"
 
 bool Resources::Texture::loadTexture(const std::string& filename)
 {

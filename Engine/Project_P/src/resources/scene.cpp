@@ -1,6 +1,6 @@
-#include "resources/scene.hpp"
-
 #include "utils/memleaks.hpp"
+
+#include "resources/scene.hpp"
 
 Resources::Scene::Scene(const char* sn)
     : sceneName(sn)

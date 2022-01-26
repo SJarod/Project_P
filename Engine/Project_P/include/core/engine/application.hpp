@@ -3,9 +3,9 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
+#include "math/math.hpp"
 #include "utils/singleton.hpp"
 
-#include "math/math.hpp"
 #include "core/datastructure/graph.hpp"
 
 namespace Core

@@ -1,6 +1,7 @@
 #pragma once
 
 #include <vector>
+#include <string>
 
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
@@ -9,8 +10,6 @@
 
 #include "physics/primitives3/box.hpp"
 #include "physics/primitives3/sphere.hpp"
-
-#include <string>
 
 namespace Resources
 {

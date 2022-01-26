@@ -1,8 +1,7 @@
-#include "lowrenderer/camera.hpp"
-
+#include <iostream>
 #include "core/engine/application.hpp"
 
-#include <iostream>
+#include "lowrenderer/camera.hpp"
 
 LowRenderer::Camera::Camera()
 {

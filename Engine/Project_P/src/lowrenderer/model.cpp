@@ -1,6 +1,6 @@
-#include "lowrenderer/model.hpp"
-
 #include "utils/memleaks.hpp"
+
+#include "lowrenderer/model.hpp"
 
 LowRenderer::Model::Model()
 {
@@ -28,7 +28,7 @@ void LowRenderer::Model::draw() const
 
 	//rendering
 	shader->use();
-	shader->passMat4(VP * mesh->transform.getModelMatrix(), "mvp");
+	shader->uniformMat4(VP * mesh->transform.getModelMatrix(), false, "mvp");
 
 	texture->bindTexture();
 

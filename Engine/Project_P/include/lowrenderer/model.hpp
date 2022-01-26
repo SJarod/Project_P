@@ -1,11 +1,11 @@
 #pragma once
 
+#include "math/math.hpp"
+
 #include "resources/shader.hpp"
 #include "resources/mesh.hpp"
 #include "resources/texture.hpp"
 #include "lowrenderer/camera.hpp"
-
-#include "math/math.hpp"
 
 namespace LowRenderer
 {

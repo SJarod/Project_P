@@ -1,6 +1,6 @@
-#include "core/engine/application.hpp"
-
 #include <iostream>
+
+#include "core/engine/application.hpp"
 
 int Core::Engine::Application::init()
 {

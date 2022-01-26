@@ -1,7 +1,7 @@
 #pragma once
 
-#include "lowrenderer/object.hpp"
 #include "math/math.hpp"
+#include "lowrenderer/object.hpp"
 
 namespace LowRenderer
 {

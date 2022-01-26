@@ -1,9 +1,9 @@
 #pragma once
 
+#include "math/math.hpp"
+
 #include "lowrenderer/object.hpp"
 #include "lowrenderer/model.hpp"
-
-#include "math/math.hpp"
 
 namespace LowRenderer
 {
