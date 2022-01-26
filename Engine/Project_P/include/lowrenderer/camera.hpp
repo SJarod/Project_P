@@ -25,7 +25,7 @@ namespace LowRenderer
 		float	far = 1000.f;
 
 		mat4	getViewMatrix() const;
-		mat4	getProjMatrix(const bool ortho) const;
+		mat4	getProjMatrix() const;
 
 	public:
 		virtual void	start() override;

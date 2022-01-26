@@ -15,12 +15,12 @@ mat4 LowRenderer::Camera::getViewMatrix() const
 	return rotateXMatrix(transform.rotation.x) * rotateYMatrix(-transform.rotation.y) * translateMatrix(-transform.position);
 }
 
-mat4 LowRenderer::Camera::getProjMatrix(const bool ortho) const
+mat4 LowRenderer::Camera::getProjMatrix() const
 {
 	using namespace Math3;
 
-	if (ortho)
-		return orthographic(-orthographicRange, orthographicRange, -orthographicRange, orthographicRange, near, far);
+	if (isOrthographic)
+		return orthographic(-orthographicRange, orthographicRange, -orthographicRange, orthographicRange, -orthographicRange, orthographicRange);
 
 	return perspective(fovY, aspect, near, far);
 }
@@ -64,10 +64,10 @@ void LowRenderer::Camera::update()
 
 mat4 LowRenderer::Camera::getVPMatrix() const
 {
-	return getProjMatrix(isOrthographic) * getViewMatrix();
+	return getProjMatrix() * getViewMatrix();
 }
 
 mat4 LowRenderer::Camera::getMVPMatrix(const mat4& modelMatrix) const
 {
-	return getProjMatrix(isOrthographic) * getViewMatrix() * modelMatrix;
+	return getProjMatrix() * getViewMatrix() * modelMatrix;
 }

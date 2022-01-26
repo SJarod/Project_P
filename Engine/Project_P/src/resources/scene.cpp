@@ -5,28 +5,33 @@
 Resources::Scene::Scene(const char* sn)
     : sceneName(sn)
 {
+    debugCam = new Camera;
+    viewCam = debugCam;
+    dynamicObjs.push_back(debugCam);
+
+    staticObjs.push_back(new GameObject);
 }
 
 Resources::Scene::~Scene()
 {
-    for (Object* obj : objs)
+    for (Object* obj : staticObjs)
         delete obj;
 
-    objs.clear();
-}
+    for (Object* obj : dynamicObjs)
+        delete obj;
 
-void Resources::Scene::loadSceneFromFile()
-{
-    debugCam = new Camera;
-    viewCam = debugCam;
-    objs.push_back(debugCam);
-
-    objs.push_back(new GameObject);
+    staticObjs.clear();
+    dynamicObjs.clear();
 }
 
 void Resources::Scene::startScene()
 {
-    for (Object* obj : objs)
+    for (Object* obj : staticObjs)
+    {
+        obj->start();
+    }
+
+    for (Object* obj : dynamicObjs)
     {
         obj->start();
     }
@@ -34,7 +39,7 @@ void Resources::Scene::startScene()
 
 void Resources::Scene::updateScene()
 {
-    for (Object* obj : objs)
+    for (Object* obj : dynamicObjs)
     {
         obj->update();
     }
@@ -42,13 +47,20 @@ void Resources::Scene::updateScene()
 
 void Resources::Scene::renderScene() const
 {
-    /* Render here */
-    glClearColor(0.f, 0.f, 0.f, 1.0f);
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glEnable(GL_DEPTH_TEST);
 
-    for (Object* obj : objs)
+    glClearColor(0.f, 0.f, 0.f, 1.0f);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+    for (Object* obj : staticObjs)
     {
         obj->render();
     }
+
+    for (Object* obj : dynamicObjs)
+    {
+        obj->render();
+    }
+
+    glDisable(GL_DEPTH_TEST);
 }

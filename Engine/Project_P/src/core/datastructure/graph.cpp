@@ -12,7 +12,6 @@ Core::DataStructure::Graph::~Graph()
 void Core::DataStructure::Graph::loadScene(const char* filename)
 {
 	scene = new Scene(filename);
-	getCurrentScene()->loadSceneFromFile();
 }
 
 Scene* Core::DataStructure::Graph::getCurrentScene() const

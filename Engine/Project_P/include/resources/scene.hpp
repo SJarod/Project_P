@@ -14,18 +14,16 @@ namespace Resources
 		const char* sceneName;
 
 	public:
-		std::vector<Object*> objs;
+		std::vector<Object*> staticObjs;
+		std::vector<Object*> dynamicObjs;
 
 		Camera* debugCam = nullptr;
 		Camera* gameCam = nullptr;
 		//the used camera
 		Camera* viewCam = nullptr;
 
-		Scene() = default;
 		Scene(const char* sceneName);
 		~Scene();
-
-		void loadSceneFromFile();
 
 		void startScene();
 		void updateScene();
